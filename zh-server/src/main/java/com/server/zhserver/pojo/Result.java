@@ -10,6 +10,13 @@ import lombok.Generated;
 @Data
 @AllArgsConstructor
 public class Result {
-    // 响应码
+    /**
+     *  响应码
+     */
     private int code;
+    private String msg;
+
+    public Result(int code){
+        this.code=code;
+    }
 }
