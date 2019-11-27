@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/excelresolve/excelresolve.iml" filepath="$PROJECT_DIR$/excelresolve/excelresolve.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vhr/hrserver/hrserver.iml" filepath="$PROJECT_DIR$/vhr/hrserver/hrserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jeecg-boot/jeecg-boot/jeecg-boot-base-common/jeecg-boot-base-common.iml" filepath="$PROJECT_DIR$/jeecg-boot/jeecg-boot/jeecg-boot-base-common/jeecg-boot-base-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jeecg-boot/jeecg-boot/jeecg-boot-module-system/jeecg-boot-module-system.iml" filepath="$PROJECT_DIR$/jeecg-boot/jeecg-boot/jeecg-boot-module-system/jeecg-boot-module-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jfinal/jfinal.iml" filepath="$PROJECT_DIR$/jfinal/jfinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/restfuldemo/restfuldemo.iml" filepath="$PROJECT_DIR$/restfuldemo/restfuldemo.iml" />
+    </modules>
+  </component>
+</project>

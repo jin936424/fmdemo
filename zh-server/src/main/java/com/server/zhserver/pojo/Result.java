@@ -15,8 +15,4 @@ public class Result {
      */
     private int code;
     private String msg;
-
-    public Result(int code){
-        this.code=code;
-    }
 }

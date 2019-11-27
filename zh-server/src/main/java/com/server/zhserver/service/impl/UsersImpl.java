@@ -14,7 +14,7 @@ public class UsersImpl {
     @Autowired
     private UsersMapper usersMapper;
 
-    public int queryByuserName(String userName){
+    public Users queryByuserName(String userName){
         return usersMapper.queryByUsername(userName);
     }
 

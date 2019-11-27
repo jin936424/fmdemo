@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsersService {
     @Autowired
     private UsersImpl usersImpl;
-    public int queryByuserName(String userName){
+    public Users queryByuserName(String userName){
         return usersImpl.queryByuserName(userName);
     }
 

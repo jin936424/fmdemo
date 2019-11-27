@@ -35,11 +35,10 @@ public class LoginController {
         Users user = usersService.queryByUserNameAndPassword(username, requestUser.getPassword());
         if (null == user) {
             String message = "账号密码错误";
-            System.out.println(message);
             return new Result(400,message);
         } else {
             session.setAttribute("user", user);
-            return new Result(200);
+            return new Result(200,"success");
         }
     }
 
