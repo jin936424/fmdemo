@@ -20,6 +20,9 @@ public class WebConfigura implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 这条语句的作用是对所有路径应用拦截器，除了 /index.html。
-        registry.addInterceptor(getLoginIntercepter()).addPathPatterns("/**").excludePathPatterns("/index.xml");
+        registry.addInterceptor(getLoginIntercepter()).addPathPatterns("/**").
+                excludePathPatterns("/index.xml").
+                excludePathPatterns("/api/login").
+                excludePathPatterns("/api/logout");
     }
 }

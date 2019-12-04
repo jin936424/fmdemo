@@ -5,6 +5,8 @@ import com.server.zhserver.pojo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 /***
  * Created by dz on 2019-11-14
  * @author Administrator
@@ -21,5 +23,11 @@ public class UsersImpl {
     public Users queryByUserNameAndPassword(String userName,String password){
         return usersMapper.queryByUserNameAndPassword(userName,password);
     }
+    public int insert(Users user){
+        return usersMapper.insert(user);
+    }
 
+    public boolean updateLoginTime(String userName, Date loginTime){
+        return usersMapper.updateLoginTime(userName, loginTime)==1;
+    }
 }

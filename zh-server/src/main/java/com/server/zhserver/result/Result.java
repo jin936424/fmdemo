@@ -1,4 +1,4 @@
-package com.server.zhserver.pojo;
+package com.server.zhserver.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,4 +15,5 @@ public class Result {
      */
     private int code;
     private String msg;
+    private Object data;
 }

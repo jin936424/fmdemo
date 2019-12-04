@@ -21,7 +21,7 @@ public class ZHRealm extends AuthorizingRealm {
     private UsersService usersService;
 
     /**
-     *  获取授权信息方法
+     *  获取授权信息方法 (权限查询)
      * @param principalCollection
      * @return
      */
@@ -32,7 +32,7 @@ public class ZHRealm extends AuthorizingRealm {
     }
 
     /**
-     * 获取认证信息
+     * 获取认证信息 (登录)
      * @param token
      * @return
      * @throws AuthenticationException
@@ -40,7 +40,7 @@ public class ZHRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String userName = token.getPrincipal().toString();
-        Users user = usersService.queryByuserName(userName);
+        Users user = usersService.queryUserByuserName(userName);
         String passwordInDB = user.getPassword();
         String salt = user.getSalt();
         // 加密
