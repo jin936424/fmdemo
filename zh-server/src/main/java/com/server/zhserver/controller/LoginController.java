@@ -4,20 +4,23 @@ import com.server.zhserver.result.Result;
 import com.server.zhserver.pojo.Users;
 import com.server.zhserver.result.ResultFactory;
 import com.server.zhserver.service.UsersService;
+import com.server.zhserver.util.DateUtil;
 import com.server.zhserver.util.SignUtil;
+import com.server.zhserver.util.UploadUtil;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
@@ -32,6 +35,11 @@ public class LoginController {
     UsersService usersService;
 
     private static final Logger logger = Logger.getLogger(LoginController.class);
+
+    //默认头像
+    private static final String profile = "http://i1.fuimg.com/705223/cdb74704b0e66bec.jpg";
+    //默认简介
+    private static final String intro = "这个人很懒，什么也没留下..";
 
     /**
      * 登录
@@ -48,8 +56,8 @@ public class LoginController {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, pwd);
         try {
             subject.login(usernamePasswordToken);
-            usersService.updateLoginTime(username,new Date(System.currentTimeMillis()));
-            return ResultFactory.buildSuccessResult(usernamePasswordToken);
+            usersService.updateLoginTime(username, DateUtil.getNow());
+            return ResultFactory.buildSuccessResult(usersService.queryUserByuserName(username));
         } catch (AuthenticationException e) {
             String message = "账号密码错误";
             return ResultFactory.buildFailResult(message);
@@ -81,6 +89,10 @@ public class LoginController {
 
         regUser.setPassword(encodedPwd);
         regUser.setSalt(salt);
+        regUser.setIntro(intro);
+        regUser.setProfile(profile);
+        regUser.setRegisterTime(DateUtil.getNow());
+
         usersService.register(regUser);
         return ResultFactory.buildSuccessResult(regUser);
     }
@@ -97,6 +109,45 @@ public class LoginController {
         return ResultFactory.buildSuccessResult("success");
     }
 
+    /***
+     * 查询个人信息
+     * @param reqUser
+     * @return Result
+     */
+    @CrossOrigin
+    @RequestMapping("/queryByUserName")
+    public Result queryByUserName(@RequestBody Users reqUser){
+        Users res = usersService.queryUserByuserName(reqUser.getUsername());
+        return ResultFactory.buildSuccessResult(res);
+    }
+
+
+    /**
+     * 头像上传 已经废弃 使用网络图床
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/upload")
+    public String upload(MultipartFile file) throws IOException {
+        String fileName = file.getOriginalFilename();
+        String savePath = "E:\\Idea_workspace\\taskspace\\zh-server\\src\\main\\resources\\static\\headpoint";
+        String newFilePath = UploadUtil.upload(fileName, file, savePath);
+        return newFilePath;
+    }
+    /***
+     * 修改个人信息
+     * @param reqUser
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/update")
+    public Result updateByUserName(@RequestBody Users reqUser){
+        if (usersService.updateByUsername(reqUser)) {
+            return ResultFactory.buildSuccessResult(usersService.queryUserByuserName(reqUser.getUsername()));
+        } else {
+            return ResultFactory.buildFailResult("error");
+        }
+    }
 
     /**
      *  微信公众号认证

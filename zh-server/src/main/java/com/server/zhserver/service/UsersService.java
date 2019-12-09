@@ -35,4 +35,7 @@ public class UsersService {
     public boolean updateLoginTime(String userName, Date loginTime){
         return usersImpl.updateLoginTime(userName, loginTime);
     }
+    public boolean updateByUsername(Users user){
+        return usersImpl.updateByUsername(user);
+    }
 }

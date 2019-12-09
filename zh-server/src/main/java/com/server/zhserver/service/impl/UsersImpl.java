@@ -30,4 +30,8 @@ public class UsersImpl {
     public boolean updateLoginTime(String userName, Date loginTime){
         return usersMapper.updateLoginTime(userName, loginTime)==1;
     }
+
+    public boolean updateByUsername(Users user){
+        return usersMapper.updateByUserName(user)==1;
+    }
 }
