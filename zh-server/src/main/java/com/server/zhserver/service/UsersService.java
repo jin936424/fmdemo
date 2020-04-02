@@ -12,7 +12,6 @@ import java.util.Date;
  * Created by dz on 2019-11-14
  */
 @Service
-@Transactional
 public class UsersService {
     @Autowired
     private UsersImpl usersImpl;

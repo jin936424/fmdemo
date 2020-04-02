@@ -10,6 +10,7 @@ import java.util.UUID;
  * Created by dz on 2019-12-4
  */
 public class UploadUtil {
+
     /***
      * 文件上传
      * @param file
@@ -19,7 +20,7 @@ public class UploadUtil {
     public static String upload(String uploadName, MultipartFile file, String savePath) throws IOException {
         if (!"".equals(uploadName) && uploadName!=null) {
             UUID randomUUID = UUID.randomUUID();
-            String newFileName = randomUUID.toString() + "_" + uploadName;
+            String newFileName = randomUUID.toString() + "_" +DateUtil.getDateStr()+ uploadName;
             String saveFilePath = savePath + "\\" + newFileName;
             file.transferTo(new File(saveFilePath));
             return saveFilePath;

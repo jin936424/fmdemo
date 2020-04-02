@@ -1,6 +1,7 @@
 package com.server.zhserver.util;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /***
@@ -9,5 +10,9 @@ import java.util.Date;
 public class DateUtil {
     public static Date getNow(){
         return new Date(System.currentTimeMillis());
+    }
+
+    public static String getDateStr(){
+        return new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
     }
 }
