@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /***
  * Created by dz on 2020-4-2
+ * @author Administrator
  */
 @Controller
 public class MainController {
@@ -18,6 +19,7 @@ public class MainController {
     @RequestMapping("index")
     public String main(Model model){
         model.addAttribute("param", "jack");
+        model.addAttribute("users",userService.findAll());
         return "index";
     }
 }

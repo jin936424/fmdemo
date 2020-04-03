@@ -21,6 +21,21 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping(value = "/find/{id}", produces = "application/json")
+    public User find(@PathVariable(value = "id") Long id){
+        return userService.findById(id).get();
+    }
+
+    @PostMapping("/update")
+    public boolean update(User user){
+        return userService.update(user);
+    }
+
+    @PostMapping(value = "/delete/{id}")
+    public boolean delete(@PathVariable("id") Long id){
+        return userService.deleteById(id);
+    }
+
     @PutMapping("/add")
     public String save(User user){
         User res = userService.save(user);
